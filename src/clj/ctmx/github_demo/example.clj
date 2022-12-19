@@ -10,8 +10,9 @@
 (defmacro defexample [endpoint f]
   (let [s (-> endpoint (.replace "/" "") symbol)]
     `(def ~s
-      (let [f# ~f]
-        (spit
-         ~(str spit-dir (.replace endpoint "-" "_") ".html")
-         (-> {} f# render))
-        (ctmx/make-routes ~endpoint f#)))))
+      (do
+        (->> (~f {})
+             render
+             (spit
+              ~(str spit-dir (.replace endpoint "-" "_") ".html")))
+        (ctmx/make-routes "" ~f)))))

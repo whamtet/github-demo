@@ -93,8 +93,10 @@
     (customer-list req "Joe" "Stewart" [])))
 
 (defn ui-routes [base-path]
-  [demo
-   data-flow
-   nesting-components
-   parameter-casting
-   transforming])
+  (mapcat
+   #(drop 3 %)
+   [demo
+    data-flow
+    nesting-components
+    parameter-casting
+    transforming]))

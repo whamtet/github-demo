@@ -2,4 +2,5 @@
     (:require
       [clojure.pprint]))
 
-(def pprint clojure.pprint/pprint)
+(defn pprint [x]
+  (with-out-str (clojure.pprint/pprint x)))

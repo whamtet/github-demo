@@ -22,6 +22,7 @@
            ;; kit Libs
  io.github.kit-clj/kit-core {:mvn/version "1.0.3"}
  io.github.kit-clj/kit-undertow {:mvn/version "1.0.4"}
+ ring-cors/ring-cors {:mvn/version "0.1.13"}
  ctmx/ctmx {:git/url "https://github.com/whamtet/ctmx",
             :git/sha "8dc4d32e742baccea4bd8cbd017f4eff80aa51aa"}}
  :aliases {:build {:deps {io.github.clojure/tools.build {:git/sha "e3e3532"
