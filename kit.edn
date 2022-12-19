@@ -1,0 +1,8 @@
+{:full-name "ctmx/github-demo"
+ :ns-name   "ctmx.github-demo"
+ :sanitized "ctmx/github_demo"
+ :name      "github-demo"
+ :modules   {:root         "modules"
+             :repositories [{:url  "https://github.com/whamtet/modules.git"
+                             :tag  "master"
+                             :name "kit-modules"}]}}
