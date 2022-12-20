@@ -4,7 +4,7 @@
       [ctmx.render :as render]
       [hiccup.core :as h]))
 
-(def spit-dir "../../WebstormProjects/ctmx/ctmx-doc/_includes/serverless/functions/core")
+(def spit-dir "../../WebstormProjects/ctmx/ctmx-doc/_includes/examples")
 (def render #(->> % render/walk-attrs (vector :div {:hx-ext "lambda-cors"}) h/html))
 
 (defmacro defexample [endpoint f]

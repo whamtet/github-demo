@@ -23,7 +23,7 @@
            [:img.htmx-indicator {:src "../../bars.svg"}]]]]))
 
 (defexample
-  "/demo"
+  "/click-to-load-handler"
   (fn [req]
     [:table
       [:thead

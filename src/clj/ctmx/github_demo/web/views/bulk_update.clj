@@ -41,5 +41,5 @@
     "Deactivate"]])
 
 (defexample
-  "/demo"
+  "/bulk-update-handler"
   (fn [req] (update-form req #{} init-data nil)))

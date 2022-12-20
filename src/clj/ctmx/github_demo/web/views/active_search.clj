@@ -19,7 +19,7 @@
       (map tr))))
 
 (defexample
-  "/demo"
+  "/active-search-handler"
   (fn [req]
     [:div
       [:h3 "Search Contacts"]

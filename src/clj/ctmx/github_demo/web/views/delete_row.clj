@@ -19,7 +19,7 @@
       [:td [:button.btn.btn-danger {:hx-delete "tr"} "Delete"]]]))
 
 (defexample
-  "/demo"
+  "/delete-row-handler"
   (fn [req]
     [:table.table.delete-row-example
       [:thead

@@ -22,7 +22,7 @@
         (progress width)])))
 
 (defexample
-  "/demo"
+  "/progress-bar-handler"
   (fn [req]
     [:div {:style "height: 200px"}
       [:div {:hx-target "this"}

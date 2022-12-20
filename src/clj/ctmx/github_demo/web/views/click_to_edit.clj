@@ -35,6 +35,6 @@
     [:button.btn.margin "Save"]
     [:button.btn.margin {:hx-get "form-ro"} "Cancel"]])
 
-(defexample "/edit-demo"
+(defexample "/click-to-edit-handler"
   (fn [req]
     (form-ro req "Joe" "Blow" "joe@blow.com")))

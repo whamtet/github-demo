@@ -2,7 +2,20 @@
   (:require
     [ctmx.core :as ctmx :refer [defcomponent]]
     [ctmx.github-demo.example :refer [defexample]]
-    [ctmx.github-demo.util :as util]))
+    [ctmx.github-demo.util :as util]
+    [ctmx.github-demo.web.views.active-search :refer [active-search-handler]]
+    [ctmx.github-demo.web.views.bulk-update :refer [bulk-update-handler]]
+    [ctmx.github-demo.web.views.click-to-edit :refer [click-to-edit-handler]]
+    [ctmx.github-demo.web.views.click-to-load :refer [click-to-load-handler]]
+    [ctmx.github-demo.web.views.delete-row :refer [delete-row-handler]]
+    [ctmx.github-demo.web.views.dialogs :refer [dialogs-handler]]
+    [ctmx.github-demo.web.views.infinite-scroll :refer [infinite-scroll-handler]]
+    [ctmx.github-demo.web.views.inline-validation :refer [inline-validation-handler]]
+    [ctmx.github-demo.web.views.modal-bootstrap :refer [modal-bootstrap-handler]]
+    [ctmx.github-demo.web.views.progress-bar :refer [progress-bar-handler]]
+    [ctmx.github-demo.web.views.sortable :refer [sortable-handler]]
+    [ctmx.github-demo.web.views.tabs-hateoas :refer [tabs-hateoas-handler tabs-hateoas-handler2]]
+    [ctmx.github-demo.web.views.value-select :refer [value-select-handler]]))
 
 (defcomponent ^:endpoint hello [req my-name]
   [:div#hello "Hello " my-name])
@@ -32,9 +45,9 @@
   (fn [req]
     (form req "Barry" "")))
 
-(defcomponent table-row [req i person]
+(defcomponent table-row [req i first-name last-name]
   [:tr
-    [:td (:first-name person)] [:td (:last-name person)]])
+    [:td first-name] [:td last-name]])
 
 (defcomponent table [req]
   [:table
@@ -59,7 +72,7 @@
   (fn [req]
     (click-div req 0)))
 
-(defn add-customer [{:keys [first-name last-name customer]}]
+(defn add-customer [_ {:keys [first-name last-name customer]}]
   {:customer
    (conj (or customer []) {:first-name first-name :last-name last-name})})
 
@@ -99,4 +112,19 @@
     data-flow
     nesting-components
     parameter-casting
-    transforming]))
+    transforming
+    ;; other demos
+    active-search-handler
+    bulk-update-handler
+    click-to-edit-handler
+    click-to-load-handler
+    delete-row-handler
+    dialogs-handler
+    infinite-scroll-handler
+    inline-validation-handler
+    modal-bootstrap-handler
+    progress-bar-handler
+    sortable-handler
+    tabs-hateoas-handler
+    tabs-hateoas-handler2
+    value-select-handler]))

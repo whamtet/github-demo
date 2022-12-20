@@ -17,7 +17,7 @@
    [:label.mr label] [:input {:type "text" :name name}]])
 
 (defexample
-  "/demo"
+  "/inline-validation-handler"
   (fn [req]
     [:div
      [:h3 "Signup Form"]

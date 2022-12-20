@@ -18,6 +18,6 @@
       (content (range 1 6))]))
 
 (defexample
-  "/demo"
+  "/sortable-handler"
   (fn [req]
     (sortable req nil)))

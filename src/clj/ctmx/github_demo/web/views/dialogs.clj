@@ -7,7 +7,7 @@
   [:div#response.mmargin "You entered " (headers "hx-prompt")])
 
 (defexample
-  "/demo"
+  "/dialogs-handler"
   (fn [req]
     [:div
       [:button.btn.mb

@@ -1,4 +1,4 @@
-(ns serverless.examples.value-select
+(ns ctmx.github-demo.web.views.value-select
     (:require
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
@@ -26,6 +26,6 @@
         (select {} (first models) models)]]))
 
 (defexample
-  "/demo"
+  "/value-select-handler"
   (fn [req]
     (models req "Audi")))

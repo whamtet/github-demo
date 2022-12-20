@@ -19,7 +19,7 @@
   (map tr (range page (+ 10 page))))
 
 (defexample
-  "/demo"
+  "/infinite-scroll-handler"
   (fn [req]
     [:table
       [:thead

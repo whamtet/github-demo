@@ -1,4 +1,4 @@
-(ns serverless.examples.tabs-hateoas
+(ns ctmx.github-demo.web.views.tabs-hateoas
     (:require
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
@@ -17,7 +17,7 @@
       "This is the content for tab " tab-index]])
 
 (defexample
-  "/demo"
+  "/tabs-hateoas-handler"
   (fn [req]
     (content req 1)))
 
@@ -32,7 +32,7 @@
    "This is the content for tab " i])
 
 (defexample
-  "/demo2"
+  "/tabs-hateoas-handler2"
   (fn [req]
     [:div
      [:div.tab-list

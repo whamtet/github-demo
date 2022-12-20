@@ -18,7 +18,7 @@
               "Close"]]]]]))
 
 (defexample
-  "/demo"
+  "/modal-bootstrap-handler"
   (fn [req]
     modal ;; need to include modal in list of endpoints
     [:div
