@@ -9,6 +9,7 @@
 (defexample
   "/dialogs-handler"
   (fn [req]
+    reply
     [:div
       [:button.btn.mb
         {:hx-post "reply"

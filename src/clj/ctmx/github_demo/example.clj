@@ -15,4 +15,4 @@
              render
              (spit
               ~(str spit-dir (.replace endpoint "-" "_") ".html")))
-        (ctmx/make-routes "" ~f)))))
+        (drop 3 (ctmx/make-routes "" ~f))))))

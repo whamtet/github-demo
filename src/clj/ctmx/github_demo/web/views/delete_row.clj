@@ -9,7 +9,7 @@
    {:name "Fuqua Tarkenton" :email "fuqua@tarkenton.org"}
    {:name "Kim Yee"	:email "kim@yee.org"}])
 
-(defcomponent ^:endpoint tr [{:keys [request-method]} i {:keys [name email]}]
+(defcomponent ^:endpoint tr [{:keys [request-method]} name email]
   (if (= :delete request-method)
     ""
     [:tr

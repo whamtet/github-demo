@@ -37,4 +37,5 @@
 
 (defexample "/click-to-edit-handler"
   (fn [req]
+    form-edit
     (form-ro req "Joe" "Blow" "joe@blow.com")))

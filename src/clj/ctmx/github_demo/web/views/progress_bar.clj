@@ -7,11 +7,12 @@
   [:div.progress
     [:div#pb.progress-bar {:style (str "width:" width "%")}]])
 
-(defcomponent ^:endpoint start [req ^:float width]
+(defcomponent ^:endpoint start [req ^:double width]
+  (prn 'width width)
   (let [width (if width (-> width (+ (rand 30)) (min 100)) 0)]
     (if (= width 100)
       [:div {:hx-target "this"}
-        [:h3 "Complete"]
+        [:h3 "Complete" width]
         (progress 100)
         [:button.btn {:hx-post "start"} "Restart"]]
       [:div {:hx-target "this"
@@ -24,6 +25,7 @@
 (defexample
   "/progress-bar-handler"
   (fn [req]
+    start
     [:div {:style "height: 200px"}
       [:div {:hx-target "this"}
         [:h3 "Start Progress"]
