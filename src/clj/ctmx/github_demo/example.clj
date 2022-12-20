@@ -8,11 +8,9 @@
 (def render #(->> % render/walk-attrs (vector :div {:hx-ext "lambda-cors"}) h/html))
 
 (defmacro defexample [endpoint f]
-  (let [s (-> endpoint (.replace "/" "") symbol)]
-    `(def ~s
-      (do
-        (->> (~f {})
-             render
-             (spit
-              ~(str spit-dir (.replace endpoint "-" "_") ".html")))
-        (drop 3 (ctmx/make-routes "" ~f))))))
+  (let [s (-> endpoint (.replace "/" "") symbol)
+        s2 (symbol (str s "-static"))]
+    `(do
+      (def ~s (drop 3 (ctmx/make-routes "" ~f)))
+      (def ~s2 {:f ~(str spit-dir (.replace endpoint "-" "_") ".html")
+                :s (render (~f {}))}))))
