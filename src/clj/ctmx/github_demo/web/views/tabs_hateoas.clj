@@ -9,7 +9,7 @@
        :class (when (= i val) "selected")}
     "Tab " i])
 
-(defcomponent ^:endpoint content [req ^:int tab-index]
+(defcomponent ^:endpoint content [req ^:long tab-index]
   [:div {:hx-target "this"}
     [:div.tab-list
       (map #(tab % tab-index) (range 1 4))]

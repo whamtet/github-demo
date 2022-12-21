@@ -14,4 +14,5 @@
    :opts       {:profile       :dev
                 :persist-data? true}})
 
-(def cors #"http://localhost:8000")
+;(def cors #"http://localhost:8000")
+(def cors #"https://whamtet.github.io")

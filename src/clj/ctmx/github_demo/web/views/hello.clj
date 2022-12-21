@@ -61,7 +61,7 @@
  (fn [req]
    (table req)))
 
-(defcomponent ^:endpoint click-div [req ^:int num-clicks]
+(defcomponent ^:endpoint click-div [req ^:long num-clicks]
   [:form {:id id :hx-get "click-div" :hx-trigger "click"}
    [:input {:type "hidden" :name "num-clicks" :value (inc num-clicks)}]
    "You have clicked me " num-clicks " times!"])
@@ -71,7 +71,7 @@
  (fn [req]
    (click-div req 0)))
 
-(defn add-customer [_ {:keys [first-name last-name customer]}]
+(defn add-customer [{:keys [first-name last-name customer]} _]
   {:customer
    (conj (or customer []) {:first-name first-name :last-name last-name})})
 
