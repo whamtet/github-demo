@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (def data
   {"Audi" ["A1" "A4" "A6"]
    "Toyota" ["Landcruiser" "Hiace" "Corolla"]
@@ -29,3 +30,4 @@
   "/value-select-handler"
   (fn [req]
     (models req "Audi")))
+;; snippet

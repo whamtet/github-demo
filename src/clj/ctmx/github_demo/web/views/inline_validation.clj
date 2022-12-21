@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (defcomponent ^:endpoint email [req email]
   (let [valid? (contains? #{"" "test@test.com"} email)]
     [:div {:hx-target "this"}
@@ -25,3 +26,4 @@
       (email req "")
       (input-group "First Name" "first-name")
       (input-group "Last Name" "last-name")]]))
+;; snippet

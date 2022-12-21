@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (def src "0123456789ABCDEF")
 (defn rand-str []
   (clojure.string/join (repeatedly 15 #(rand-nth src))))
@@ -29,3 +30,4 @@
       [:thead
         [:tr [:th "Name"] [:th "Email"] [:th "ID"]]]
       [:tbody (rows-click req 0)]]))
+;; snippet

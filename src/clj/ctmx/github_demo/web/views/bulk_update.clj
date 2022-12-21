@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent defn-parse]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (def init-data
   [{:name "Joe Smith" :email "joe@smith.org" :status "Inactive"}
    {:name "Angie MacDowell" :email "angie@macdowell.org" :status "Inactive"}
@@ -42,4 +43,6 @@
 
 (defexample
   "/bulk-update-handler"
-  (fn [req] (update-form req #{} init-data nil)))
+  (fn [req]
+    (update-form req #{} init-data nil)))
+;; snippet

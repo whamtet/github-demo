@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (def data
   [{:name "Joe Smith" :email "joe@smith.org"}
    {:name "Angie MacDowell" :email "angie@macdowell.org"}
@@ -34,3 +35,4 @@
           [:tr [:th "Name"] [:th "Email"]]]
         [:tbody#search-results
           (active-search req "")]]]))
+;; snippet

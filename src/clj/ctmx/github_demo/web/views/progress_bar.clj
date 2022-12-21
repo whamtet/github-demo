@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (defn- progress [width]
   [:div.progress
     [:div#pb.progress-bar {:style (str "width:" width "%")}]])
@@ -29,3 +30,4 @@
       [:div {:hx-target "this"}
         [:h3 "Start Progress"]
         [:button.btn {:hx-post "start"} "Start Job"]]]))
+;; snippet

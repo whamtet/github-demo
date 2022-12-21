@@ -9,7 +9,24 @@
 (def emaili (partial input "email"))
 (def hidden (partial input "hidden"))
 
+;; snippet
+(defcomponent ^:endpoint form-edit [req first-name last-name email]
+  [:form {:id id :hx-put "form-ro" :hx-target "this"}
+   [:div
+    [:label.mr "First Name"]
+    (text "first-name" first-name)]
+   [:div.form-group
+    [:label.mr "Last Name"]
+    (text "last-name" last-name)]
+   [:div.form-group
+    [:label.mr "Email Address"]
+    (emaili "email" email)]
+   [:button.btn.margin "Save"]
+   [:button.btn.margin {:hx-get "form-ro"} "Cancel"]])
+
 (defcomponent ^:endpoint form-ro [req first-name last-name email]
+  ;; make sure form-edit is included in endpoints
+  form-edit
   [:form {:id id :hx-target "this"}
     (hidden "first-name" first-name)
     [:div [:label "First Name"] ": " first-name]
@@ -21,21 +38,8 @@
      {:hx-put "form-edit"}
       "Click To Edit"]])
 
-(defcomponent ^:endpoint form-edit [req first-name last-name email]
-  [:form {:id id :hx-put "form-ro" :hx-target "this"}
-    [:div
-      [:label.mr "First Name"]
-      (text "first-name" first-name)]
-    [:div.form-group
-      [:label.mr "Last Name"]
-      (text "last-name" last-name)]
-    [:div.form-group
-      [:label.mr "Email Address"]
-      (emaili "email" email)]
-    [:button.btn.margin "Save"]
-    [:button.btn.margin {:hx-get "form-ro"} "Cancel"]])
-
-(defexample "/click-to-edit-handler"
+(defexample
+ "/click-to-edit-handler"
   (fn [req]
-    form-edit
     (form-ro req "Joe" "Blow" "joe@blow.com")))
+;; snippet

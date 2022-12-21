@@ -12,3 +12,4 @@
    :opts       {:profile :prod}})
 
 (def cors #"https://whamtet.github.io")
+(def dev? false)

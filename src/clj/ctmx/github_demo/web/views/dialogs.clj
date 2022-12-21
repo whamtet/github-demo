@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (defcomponent ^:endpoint reply [{:keys [headers]}]
   [:div#response.mmargin "You entered " (headers "hx-prompt")])
 
@@ -18,3 +19,4 @@
          :hx-target "#response"}
         "Prompt Submission"]
       [:div#response]]))
+;; snippet

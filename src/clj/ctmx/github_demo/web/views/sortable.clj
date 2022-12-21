@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (defn- content [items]
   (list*
     [:div.htmx-indicator "Updating..."]
@@ -21,3 +22,4 @@
   "/sortable-handler"
   (fn [req]
     (sortable req nil)))
+;; snippet

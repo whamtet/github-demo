@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (def data
   [{:name "Joe Smith" :email "joe@smith.org"}
    {:name "Angie MacDowell" :email "angie@macdowell.org"}
@@ -26,3 +27,4 @@
         [:tr [:th "Name"] [:th "Email"] [:th "Status"] [:th]]]
       [:tbody {:hx-confirm "Are you sure?" :hx-target "closest tr" :hx-swap "outerHTML swap:0.5s"}
         (ctmx.rt/map-indexed tr req data)]]))
+;; snippet

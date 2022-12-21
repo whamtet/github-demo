@@ -16,3 +16,4 @@
 
 ;(def cors #"http://localhost:8000")
 (def cors #"https://whamtet.github.io")
+(def dev? true)

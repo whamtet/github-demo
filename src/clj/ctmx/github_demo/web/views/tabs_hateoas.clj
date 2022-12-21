@@ -3,6 +3,7 @@
       [ctmx.core :as ctmx :refer [defcomponent]]
       [ctmx.github-demo.example :refer [defexample]]))
 
+;; snippet
 (defn- tab [i val]
   [:a {:hx-get "content"
        :hx-vals {:tab-index i}
@@ -20,7 +21,9 @@
   "/tabs-hateoas-handler"
   (fn [req]
     (content req 1)))
+;; snippet
 
+;; snippet
 (defn- static-tab [i]
   [:a {:class (if (= 1 i) "tab selected" "tab")
        :_ (str "on click take .selected from .tab then add .d-none to .tab-content then remove .d-none from #content" i)}
@@ -38,3 +41,4 @@
      [:div.tab-list
       (map static-tab (range 1 4))]
      (map static-content (range 1 4))]))
+;; snippet

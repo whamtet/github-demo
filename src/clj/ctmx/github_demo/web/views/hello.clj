@@ -16,6 +16,7 @@
       [ctmx.github-demo.web.views.tabs-hateoas :refer [tabs-hateoas-handler tabs-hateoas-handler2]]
       [ctmx.github-demo.web.views.value-select :refer [value-select-handler]]))
 
+;; snippet
 (defcomponent ^:endpoint hello [req my-name]
   [:div#hello "Hello " my-name])
 
@@ -30,7 +31,9 @@
              :hx-patch "hello"
              :hx-target "#hello"}]
     (hello req "")]))
+;; snippet
 
+;; snippet
 (defcomponent ^:endpoint form [req ^:path first-name ^:path last-name]
   [:form {:id id :hx-post "form"}
    [:input {:type "text" :name (path "first-name") :value first-name}] [:br]
@@ -43,7 +46,9 @@
  "/data-flow"
  (fn [req]
    (form req "Barry" "")))
+;; snippet
 
+;; snippet
 (defcomponent table-row [req i first-name last-name]
   [:tr
    [:td first-name] [:td last-name]])
@@ -60,7 +65,9 @@
  "/nesting-components"
  (fn [req]
    (table req)))
+;; snippet
 
+;; snippet
 (defcomponent ^:endpoint click-div [req ^:long num-clicks]
   [:form {:id id :hx-get "click-div" :hx-trigger "click"}
    [:input {:type "hidden" :name "num-clicks" :value (inc num-clicks)}]
@@ -70,7 +77,9 @@
  "/parameter-casting"
  (fn [req]
    (click-div req 0)))
+;; snippet
 
+;; snippet
 (defn add-customer [{:keys [first-name last-name customer]} _]
   {:customer
    (conj (or customer []) {:first-name first-name :last-name last-name})})
@@ -103,6 +112,7 @@
  "/transforming"
  (fn [req]
    (customer-list req "Joe" "Stewart" [])))
+;; snippet
 
 (defn ui-routes [base-path]
   (concat
