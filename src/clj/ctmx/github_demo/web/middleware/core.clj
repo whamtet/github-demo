@@ -10,7 +10,7 @@
   (let [cookie-store (cookie/cookie-store {:key (.getBytes ^String cookie-secret)})]
     (fn [handler]
       (-> ((:middleware env/defaults) handler opts)
-          (wrap-cors :access-control-allow-origin [#"http://localhost:8000"]
+          (wrap-cors :access-control-allow-origin [env/cors]
                      :access-control-allow-methods [:get :put :post :delete :patch])
           (defaults/wrap-defaults
            (assoc-in site-defaults-config [:session :store] cookie-store))))))
