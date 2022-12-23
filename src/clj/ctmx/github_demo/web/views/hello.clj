@@ -23,13 +23,10 @@
 (defexample
  "/demo"
  (fn [req]
-   [:div {:style "padding: 10px"}
-    [:label {:style "margin-right: 10px"}
-     "What is your name?"]
-    [:input {:type "text"
-             :name "my-name"
-             :hx-patch "hello"
-             :hx-target "#hello"}]
+   [:form.hello {:hx-patch "hello" :hx-target "#hello"}
+    [:label "What is your name?"]
+    [:input.mr {:type "text" :name "my-name"}]
+    [:input {:type "submit"}]
     (hello req "")]))
 ;; snippet
 

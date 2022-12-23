@@ -12,6 +12,24 @@
 (def html-dir "../../WebstormProjects/ctmx/ctmx-doc/_includes/examples")
 (def snippets-dir (File. "../../WebstormProjects/ctmx/ctmx-doc/_includes/snippets"))
 
+(defn- spit-lines [f lines]
+  (spit f (string/join "\n" lines)))
+
+(defn insert-snippet [snippet]
+  (let [f "../../WebstormProjects/ctmx/ctmx-doc/index_dev.html"
+        lines (-> f
+                  slurp
+                  (.split "\n"))
+        snippet? #(-> % .trim (.startsWith "<!--snippet"))
+        [head _ _ _ tail] (partition-by snippet? lines)]
+    (spit-lines f
+                (concat
+                 head
+                 ["<!--snippet-->"
+                  snippet
+                  "<!--snippet-->"]
+                 tail))))
+
 (def render #(->> % render/walk-attrs (vector :div {:hx-ext "lambda-cors"}) h/html))
 
 (defmacro defexample [endpoint f]
@@ -23,6 +41,15 @@
                    render
                    (spit
                     ~(str html-dir (.replace endpoint "-" "_") ".html"))))
+        (drop 3 (ctmx/make-routes "" ~f))))))
+
+(defmacro defexample2 [endpoint f]
+  (assert env/dev? "no defexample2 in production")
+  (let [s (-> endpoint (.replace "/" "") symbol)]
+    `(def ~s
+      (let [s# (render (~f {}))]
+        (spit ~(str html-dir (.replace endpoint "-" "_") ".html") s#)
+        (insert-snippet s#)
         (drop 3 (ctmx/make-routes "" ~f))))))
 
 (def snippet? #(= ";; snippet" %))
@@ -46,12 +73,12 @@
                  (concat
                   ["```clojure"]
                    pre
-                  ["(def routes"
+                  ["(def ring-handler"
                    fn-str
-                   (str indent "  ;; page renders html")
+                   (str indent "  ;; page renders initial html")
                    (str indent "  (page")]
                   (map #(str "  " %) (butlast rest))
-                  [(str indent "  " (last rest) ")")
+                  [(str "  " (last rest) ")")
                    "```"]))))
 
 (defn spit-snippets [f]
