@@ -9,14 +9,14 @@
       java.io.File))
 
 (def src-dir (File. "src/clj/ctmx/github_demo/web/views"))
-(def html-dir "../../WebstormProjects/ctmx/ctmx-doc/_includes/examples")
-(def snippets-dir (File. "../../WebstormProjects/ctmx/ctmx-doc/_includes/snippets"))
+(def html-dir "../ctmx-doc/_includes/examples")
+(def snippets-dir (File. "../ctmx-doc/_includes/snippets"))
 
 (defn- spit-lines [f lines]
   (spit f (string/join "\n" lines)))
 
 (defn insert-snippet [snippet]
-  (let [f "../../WebstormProjects/ctmx/ctmx-doc/index_dev.html"
+  (let [f "../ctmx-doc/index_dev.html"
         lines (-> f
                   slurp
                   (.split "\n"))
