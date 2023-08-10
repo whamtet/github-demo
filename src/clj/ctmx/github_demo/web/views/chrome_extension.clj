@@ -10,7 +10,8 @@
 (defcomponent ^:endpoint extension [req]
   [:div {:hx-ws "connect:/extension/sse"}
     (uuid-input nil)
-    [:div#stats]])
+    [:div#stats]
+    [:button.btn {:onclick "getStats()"} "Get Readability"]])
 
 (defn chrome-extension-handler []
   (conj
@@ -18,6 +19,8 @@
      "/extension"
      (fn [req]
        (htmx/page-htmx
+        {:js ["/extension.js"]
+         :css ["/output.css"]}
         (extension req))))
     ["/sse"
       (fn [req]

@@ -17,7 +17,12 @@
            :swagger {:info {:title "ctmx.github-demo API"}}
            :handler (swagger/create-swagger-handler)}}]
    ["/health"
-    {:get health/healthcheck!}]])
+    {:get health/healthcheck!}]
+   ["/readability"
+     (fn [{:keys [params body-params]}]
+       (prn params body-params)
+       {:status 200
+        :body "ok"})]])
 
 (defn route-data
   [opts]

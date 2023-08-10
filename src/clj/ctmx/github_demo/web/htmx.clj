@@ -15,10 +15,14 @@
       http-response/ok
       (http-response/content-type "text/html")))
 
-(defn page-htmx [& body]
+(defn page-htmx [{:keys [js css]} & body]
   (page
    [:head
     [:meta {:charset "UTF-8"}]
     [:title "Htmx + Kit"]
-    [:script {:src "https://unpkg.com/htmx.org@1.9.4/dist/htmx.min.js" :defer true}]]
-   [:body (render/walk-attrs body)]))
+    [:script {:src "https://unpkg.com/htmx.org@1.9.4/dist/htmx.min.js" :defer true}]
+    (for [href css]
+      [:link {:rel "stylesheet" :href href}])]
+   [:body (render/walk-attrs body)]
+   (for [src js]
+     [:script {:src src}])))
