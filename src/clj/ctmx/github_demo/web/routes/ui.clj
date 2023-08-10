@@ -2,6 +2,7 @@
   (:require
    [ctmx.github-demo.web.middleware.exception :as exception]
    [ctmx.github-demo.web.middleware.formats :as formats]
+   [ctmx.github-demo.web.views.chrome-extension :as chrome-extension]
    [ctmx.github-demo.web.views.hello :as hello]
    [integrant.core :as ig]
    [reitit.ring.middleware.muuntaja :as muuntaja]
@@ -13,7 +14,7 @@
    {:muuntaja   formats/instance
     :middleware
     [;; Default middleware for ui
-    ;; query-params & form-params
+     ;; query-params & form-params
       parameters/parameters-middleware
       ;; encoding response body
       muuntaja/format-response-middleware
@@ -26,4 +27,5 @@
   [_ {:keys [base-path]
       :or   {base-path ""}
       :as   opts}]
-  [base-path (route-data opts) (hello/ui-routes base-path)])
+  [[base-path (route-data opts) (hello/ui-routes base-path)]
+   (chrome-extension/chrome-extension-handler)])
