@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "daisyui": "^3.5.1",
+    "tailwindcss": "^3.3.3"
+  },
+  "scripts": {
+    "tailwind:build": "tailwindcss -i ./tailwind/input.css -o ./resources/public/output.css",
+    "tailwind:release": "tailwindcss -i ./tailwind/input.css -o ./resources/public/output.css -m"
+  }
+}
