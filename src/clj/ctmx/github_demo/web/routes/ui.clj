@@ -1,12 +1,33 @@
 (ns ctmx.github-demo.web.routes.ui
   (:require
+   [ctmx.core :as ctmx :refer [make-routes]]
+   [ctmx.github-demo.web.htmx :as htmx]
    [ctmx.github-demo.web.middleware.exception :as exception]
    [ctmx.github-demo.web.middleware.formats :as formats]
+   [ctmx.github-demo.web.services.sse :as sse]
    [ctmx.github-demo.web.views.chrome-extension :as chrome-extension]
    [ctmx.github-demo.web.views.hello :as hello]
    [integrant.core :as ig]
    [reitit.ring.middleware.muuntaja :as muuntaja]
    [reitit.ring.middleware.parameters :as parameters]))
+
+(defn chrome-extension-handler []
+  (conj
+    (make-routes
+     "/extension"
+     (fn [req]
+       (htmx/page-htmx
+        {:js ["/extension.js"]
+         :css ["/output.css"]}
+        (chrome-extension/extension req))))
+    ["/sse"
+      (fn [req]
+        {:undertow/websocket
+          {:on-open (fn [{:keys [channel]}]
+                      (let [k (sse/add-connection channel)]
+                        (sse/send k (chrome-extension/uuid-input k))))
+           :on-close-message (fn [{:keys [channel]}]
+                               (sse/remove-connection channel))}})]))
 
 (defn route-data [opts]
   (merge
@@ -28,4 +49,4 @@
       :or   {base-path ""}
       :as   opts}]
   [[base-path (route-data opts) (hello/ui-routes base-path)]
-   (chrome-extension/chrome-extension-handler)])
+   (chrome-extension-handler)])

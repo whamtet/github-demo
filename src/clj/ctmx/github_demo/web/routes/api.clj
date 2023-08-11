@@ -3,12 +3,17 @@
     [ctmx.github-demo.web.controllers.health :as health]
     [ctmx.github-demo.web.middleware.exception :as exception]
     [ctmx.github-demo.web.middleware.formats :as formats]
+    [ctmx.github-demo.web.services.readability :as readability]
+    [ctmx.github-demo.web.services.sse :as sse]
+    [ctmx.github-demo.web.views.chrome-extension :as chrome-extension]
     [integrant.core :as ig]
     [reitit.coercion.malli :as malli]
     [reitit.ring.coercion :as coercion]
     [reitit.ring.middleware.muuntaja :as muuntaja]
     [reitit.ring.middleware.parameters :as parameters]
-    [reitit.swagger :as swagger]))
+    [reitit.swagger :as swagger])
+  (:import
+    java.util.UUID))
 
 ;; Routes
 (defn api-routes [_opts]
@@ -19,10 +24,13 @@
    ["/health"
     {:get health/healthcheck!}]
    ["/readability"
-     (fn [{:keys [params body-params]}]
-       (prn params body-params)
+     (fn [{{:keys [uuid text]} :body-params}]
+       (->> text
+         readability/analysis
+         chrome-extension/stats
+         (sse/send (UUID/fromString uuid)))
        {:status 200
-        :body "ok"})]])
+        :body ""})]])
 
 (defn route-data
   [opts]
