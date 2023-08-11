@@ -1,6 +1,6 @@
 (ns ctmx.github-demo.web.services.readability)
 
-(def WORDS_DELIMITER #"\\PL+")
+(def WORDS_DELIMITER #"\PL+")
 (def SENTENCES_DELIMITER #"[!?.]+")
 (def PATTERN_SYLLABLE #"([aiouy]|e(?!$))+")
 
@@ -33,10 +33,10 @@
          (* 4.71 (safe-div characters words))
          (* 0.5 (safe-div words sentences))
          -21.43)
-   :fk (+
-        (* 0.39 (safe-div words sentences))
-        (* 11.8 (safe-div syllables words))
-        -15.59)
+   :fre (-
+          206.835
+          (* 1.015 (safe-div words sentences))
+          (* 84.6 (safe-div syllables words)))
    :smog (+
           (* 1.043
              (Math/sqrt (* polysyllables (safe-div 30 sentences))))

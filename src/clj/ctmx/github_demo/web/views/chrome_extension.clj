@@ -1,6 +1,8 @@
 (ns ctmx.github-demo.web.views.chrome-extension
     (:require
-      [ctmx.core :as ctmx :refer [defcomponent]]))
+      [clojure.string :as string]
+      [ctmx.core :as ctmx :refer [defcomponent]]
+      [ctmx.github-demo.web.services.readability :as readability]))
 
 (defn uuid-input [uuid]
   [:input#uuid-input {:type "hidden" :value uuid}])
@@ -26,31 +28,39 @@
 
 (defn flesch-rating [score]
   (condp <= score
-    90.0	["5th grade"	"Very easy to read. Easily understood by an average 11-year-old student."]
-    80.0	["6th grade"	"Easy to read. Conversational English for consumers."]
-    70.0	["7th grade"	"Fairly easy to read."]
-    60.0	["8th & 9th grade"	"Plain English. Easily understood by 13- to 15-year-old students."]
-    50.0	["10th to 12th grade"	"Fairly difficult to read."]
-    30.0	["College"	"Difficult to read."]
-    10.0	["College graduate"	"Very difficult to read. Best understood by university graduates."]
-    ["Professional"	"Extremely difficult to read. Best understood by university graduates."]))
+    90.0	["5th grade."	"Very easy to read, easily understood by an average 11-year-old student."]
+    80.0	["6th grade."	"Easy to read, conversational English for consumers."]
+    70.0	["7th grade."	"Fairly easy to read."]
+    60.0	["8th & 9th grade."	"Plain English, easily understood by 13- to 15-year-old students."]
+    50.0	["10th to 12th grade."	"Fairly difficult to read."]
+    30.0	["College."	"Difficult to read."]
+    10.0	["College graduate."	"Very difficult to read, best understood by university graduates."]
+    ["Professional."	"Extremely difficult to read, best understood by university graduates."]))
 
-(defn stats [{{:keys [characters
-                      words
-                      sentences
-                      syllables
-                      polysyllables]} :stats
+(defn- header [s]
+  [:h2.text-xl.mt-2 s])
+
+(defn stats* [{stats :stats
               {:keys [ari
-                      fk
+                      fre
                       smog
                       cl]} :readability}]
   [:div#stats
-    [:h3 "Readability"]
-    [:h5 "Automated readability index"]
-    [:p "Score: " ari ". " (ari-grade ari )]])
+    [:div.mt-2 (pr-str stats)]
+    (header  "Automated readability index")
+    [:p (format "Score: %.1f. " ari) (ari-grade ari)]
+    (header "Flesch reading ease")
+    [:p (format "Score: %.1f. " fre) (string/join " " (flesch-rating fre))]
+    (header "Simple measure of Gobbledygook (SMOG)")
+    [:p (format "Grade %.0f" smog)]
+    (header "Coleman-Liau index")
+    [:p (format "Grade %.0f" cl)]])
+
+(defn stats [text]
+  (-> text readability/analysis stats*))
 
 (defcomponent ^:endpoint extension [req]
-  [:div {:hx-ws "connect:/extension/sse"}
+  [:div.p-2 {:hx-ws "connect:/extension/sse"}
     (uuid-input nil)
     [:button.btn {:onclick "getStats()"} "Get Readability"]
     [:div#stats]])

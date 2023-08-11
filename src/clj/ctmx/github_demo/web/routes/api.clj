@@ -3,7 +3,6 @@
     [ctmx.github-demo.web.controllers.health :as health]
     [ctmx.github-demo.web.middleware.exception :as exception]
     [ctmx.github-demo.web.middleware.formats :as formats]
-    [ctmx.github-demo.web.services.readability :as readability]
     [ctmx.github-demo.web.services.sse :as sse]
     [ctmx.github-demo.web.views.chrome-extension :as chrome-extension]
     [integrant.core :as ig]
@@ -26,7 +25,6 @@
    ["/readability"
      (fn [{{:keys [uuid text]} :body-params}]
        (->> text
-         readability/analysis
          chrome-extension/stats
          (sse/send (UUID/fromString uuid)))
        {:status 200
