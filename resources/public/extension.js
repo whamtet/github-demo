@@ -1,4 +1,8 @@
-const getStats = () => {
-    const uuid = document.querySelector('#uuid-input').value;
-    top.postMessage(uuid, '*');
+const getStats = e => {
+    document.querySelector('#text').value = e.data;
+    document.querySelector('#text-update').click();
 };
+
+addEventListener('message', getStats);
+
+top.postMessage('ready', '*');

@@ -56,11 +56,14 @@
     (header "Coleman-Liau index")
     [:p (format "Grade %.0f" cl)]])
 
-(defn stats [text]
-  (-> text readability/analysis stats*))
+(defcomponent ^:endpoint stats [req text]
+  (if text
+    (-> text readability/analysis stats*)
+    [:div#stats]))
 
 (defcomponent ^:endpoint extension [req]
-  [:div.p-2 {:hx-ws "connect:/extension/sse"}
-    (uuid-input nil)
-    [:button.btn {:onclick "getStats()"} "Get Readability"]
-    [:div#stats]])
+  [:div.p-2
+    [:form {:hx-post "stats" :hx-target "#stats"}
+      [:input#text {:type "hidden" :name "text"}]
+      [:input#text-update {:type "submit" :style "display: none"}]]
+    (stats req nil)])

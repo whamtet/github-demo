@@ -4,7 +4,6 @@
    [ctmx.github-demo.web.htmx :as htmx]
    [ctmx.github-demo.web.middleware.exception :as exception]
    [ctmx.github-demo.web.middleware.formats :as formats]
-   [ctmx.github-demo.web.services.sse :as sse]
    [ctmx.github-demo.web.views.chrome-extension :as chrome-extension]
    [ctmx.github-demo.web.views.hello :as hello]
    [integrant.core :as ig]
@@ -19,15 +18,7 @@
        (htmx/page-htmx
         {:js ["/extension.js"]
          :css ["/output.css"]}
-        (chrome-extension/extension req))))
-    ["/sse"
-      (fn [req]
-        {:undertow/websocket
-          {:on-open (fn [{:keys [channel]}]
-                      (let [k (sse/add-connection channel)]
-                        (sse/send k (chrome-extension/uuid-input k))))
-           :on-close-message (fn [{:keys [channel]}]
-                               (sse/remove-connection channel))}})]))
+        (chrome-extension/extension req))))))
 
 (defn route-data [opts]
   (merge

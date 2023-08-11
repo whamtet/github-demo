@@ -3,8 +3,6 @@
     [ctmx.github-demo.web.controllers.health :as health]
     [ctmx.github-demo.web.middleware.exception :as exception]
     [ctmx.github-demo.web.middleware.formats :as formats]
-    [ctmx.github-demo.web.services.sse :as sse]
-    [ctmx.github-demo.web.views.chrome-extension :as chrome-extension]
     [integrant.core :as ig]
     [reitit.coercion.malli :as malli]
     [reitit.ring.coercion :as coercion]
@@ -21,14 +19,7 @@
            :swagger {:info {:title "ctmx.github-demo API"}}
            :handler (swagger/create-swagger-handler)}}]
    ["/health"
-    {:get health/healthcheck!}]
-   ["/readability"
-     (fn [{{:keys [uuid text]} :body-params}]
-       (->> text
-         chrome-extension/stats
-         (sse/send (UUID/fromString uuid)))
-       {:status 200
-        :body ""})]])
+    {:get health/healthcheck!}]])
 
 (defn route-data
   [opts]
