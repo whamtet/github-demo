@@ -1,6 +1,6 @@
 (ns ctmx.github-demo.web.services.readability)
 
-(def WORDS_DELIMITER #"\PL+")
+(def WORDS_DELIMITER #"\w+")
 (def SENTENCES_DELIMITER #"[!?.]+")
 (def PATTERN_SYLLABLE #"([aiouy]|e(?!$))+")
 

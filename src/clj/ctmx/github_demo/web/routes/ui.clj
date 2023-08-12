@@ -11,14 +11,13 @@
    [reitit.ring.middleware.parameters :as parameters]))
 
 (defn chrome-extension-handler []
-  (conj
-    (make-routes
-     "/extension"
-     (fn [req]
-       (htmx/page-htmx
-        {:js ["/extension.js"]
-         :css ["/output.css"]}
-        (chrome-extension/extension req))))))
+  (make-routes
+   "/extension"
+   (fn [req]
+     (htmx/page-htmx
+      {:js ["/extension.js"]
+       :css ["/output.css"]}
+      (chrome-extension/extension req)))))
 
 (defn route-data [opts]
   (merge
